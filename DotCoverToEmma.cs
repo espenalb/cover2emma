@@ -392,6 +392,8 @@ namespace cover2emma
 
         private static void ForEachMethod(dotcover.Event evt, Action<Entry> callback)
         {
+            if (evt.Method == null)
+                return; //REVIEW: Is this acceptable?
             foreach (dotcover.Method method in evt.Method)
                 ForEachMethod(method, callback, evt.Name);
         }
@@ -411,6 +413,8 @@ namespace cover2emma
 
         private static void ForEachMethod(dotcover.Property property, Action<Entry> callback)
         {
+            if (property.Method==null)
+                return; //TODO: Is this OK? Are we missing something...
             foreach (dotcover.Method method in property.Method)
                 ForEachMethod(method, callback, property.Name);
         }
