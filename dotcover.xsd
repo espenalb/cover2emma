@@ -45,6 +45,7 @@
           <xs:element ref="Type"/>
           <xs:element ref="Constructor"/>
           <xs:element ref="Property"/>
+          <xs:element ref="AutoProperty"/>
           <xs:element ref="Member"/>
         </xs:choice>
       </xs:sequence>
@@ -79,8 +80,23 @@
   </xs:element>
   <xs:element name="Property">
     <xs:complexType>
+
       <xs:sequence>
-        <xs:element maxOccurs="unbounded" ref="Method"/>
+        <xs:element maxOccurs="unbounded" ref="Method"/>        
+        <xs:element minOccurs="0" maxOccurs="1" ref="PropertyGetter"/>
+        <xs:element minOccurs="0" maxOccurs="1" ref="PropertySetter"/>
+      </xs:sequence>
+      <xs:attribute name="CoveragePercent" use="required" type="xs:integer"/>
+      <xs:attribute name="CoveredStatements" use="required" type="xs:integer"/>
+      <xs:attribute name="Name" use="required" type="xs:anyURI"/>
+      <xs:attribute name="TotalStatements" use="required" type="xs:integer"/>
+    </xs:complexType>
+  </xs:element>  
+  <xs:element name="AutoProperty">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" ref="PropertyGetter"/>
+        <xs:element minOccurs="0" maxOccurs="1" ref="PropertySetter"/>
       </xs:sequence>
       <xs:attribute name="CoveragePercent" use="required" type="xs:integer"/>
       <xs:attribute name="CoveredStatements" use="required" type="xs:integer"/>
@@ -121,6 +137,22 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="OwnCoverage">
+    <xs:complexType>
+      <xs:attribute name="CoveragePercent" use="required" type="xs:integer"/>
+      <xs:attribute name="CoveredStatements" use="required" type="xs:integer"/>
+      <xs:attribute name="TotalStatements" use="required" type="xs:integer"/>
+    </xs:complexType>
+  </xs:element>
+  
+  <xs:element name="PropertySetter">
+    <xs:complexType>
+      <xs:attribute name="CoveragePercent" use="required" type="xs:integer"/>
+      <xs:attribute name="CoveredStatements" use="required" type="xs:integer"/>
+      <xs:attribute name="TotalStatements" use="required" type="xs:integer"/>
+    </xs:complexType>
+  </xs:element>
+  
+  <xs:element name="PropertyGetter">
     <xs:complexType>
       <xs:attribute name="CoveragePercent" use="required" type="xs:integer"/>
       <xs:attribute name="CoveredStatements" use="required" type="xs:integer"/>
